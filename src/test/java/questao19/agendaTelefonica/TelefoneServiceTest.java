@@ -53,13 +53,23 @@ public class TelefoneServiceTest {
         Assertions.assertEquals(1,telefonesCriados.size());
     }
     @Test
-    @DisplayName("2- deve editar telefone")
+    @DisplayName("3- deve editar telefone")
     void deveEditarTelefone(){
         Telefone telefone1 = new Telefone(ID_1,TipoTelefoneEnum.CELULAR,NUMERO_1);
         Telefone telefone2 = new Telefone(ID_1,TipoTelefoneEnum.CASA,NUMERO_2);
         List<Telefone> telefones = List.of(telefone1);
-        List<Telefone> telefones1 = telefoneService.criarTelefone(telefone1);
-        List<Telefone> telefonesEditado = telefoneService.editarTelefone(telefone2);
-        Assertions.assertEquals();
+        List<Telefone> telefonesEditados = telefoneService.editarTelefone(telefone2);
+        Assertions.assertEquals(telefones.get(0).getId(), telefonesEditados.get(0).getId());
+        Assertions.assertNotEquals(telefones.get(0).getNumero(), telefonesEditados.get(0).getNumero());
+        Assertions.assertNotEquals(telefones.get(0).getTipo(), telefonesEditados.get(0).getTipo());
     }
+
+    @Test
+    @DisplayName("1- deve retornar listas de Telefone")
+    void deveAdicionarTelefone(){
+        Telefone telefone1 = new Telefone(ID_1,TipoTelefoneEnum.CELULAR,NUMERO_1);
+        Telefone telefone2 = new Telefone(ID_2,TipoTelefoneEnum.CASA,NUMERO_2);
+        List<Telefone> telefones = List.of(telefone1, telefone2);
+        telefoneService.criarTelefone(telefone1);
+        List<Telefone> telefonesCriados = telefoneService.criarTelefone(telefone2);
 }
