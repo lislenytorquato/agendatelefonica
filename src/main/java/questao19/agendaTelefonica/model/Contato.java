@@ -1,14 +1,17 @@
 package questao19.agendaTelefonica.model;
 
+import java.util.List;
+import java.util.Objects;
+
 public class Contato {
 
     private String nome;
-    private Telefone telefone;
+    private List<Telefone> telefone;
 
     public Contato() {
     }
 
-    public Contato(String nome, Telefone telefone) {
+    public Contato(String nome, List<Telefone> telefone) {
         this.nome = nome;
         this.telefone = telefone;
     }
@@ -21,11 +24,23 @@ public class Contato {
         this.nome = nome;
     }
 
-    public Telefone getTelefone() {
+    public List<Telefone> getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Telefone telefone) {
+    public void setTelefone(List<Telefone> telefone) {
         this.telefone = telefone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Contato contato = (Contato) o;
+        return Objects.equals(nome, contato.nome) && Objects.equals(telefone, contato.telefone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, telefone);
     }
 }
