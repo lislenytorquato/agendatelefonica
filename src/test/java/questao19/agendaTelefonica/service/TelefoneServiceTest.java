@@ -16,8 +16,8 @@ public class TelefoneServiceTest {
     
     public final static String NUMERO_1 = "54 12345-6789";
     public final static String NUMERO_2 = "54 98765-4321";
-    public final static Long ID_1 = 1L;
-    public final static Long ID_2 = 2L;
+    public final static Long ID_1 = Long.valueOf("1");
+    public final static Long ID_2 = Long.valueOf("2");
     
     @InjectMocks
     TelefoneService telefoneService;

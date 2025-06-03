@@ -13,9 +13,8 @@ import java.util.Optional;
 @Service
 public class ContatoService {
 
-    List<Contato> contatos = new ArrayList<>();
-    List<Contato> favoritos = new ArrayList<>();
-    List<Telefone> telefones = new ArrayList<>();
+    private List<Contato> contatos = new ArrayList<>();
+    private List<Contato> favoritos = new ArrayList<>();
 
     public List<Contato> adicionarContato(Contato contatoNovo){
         Contato contato = new Contato();
@@ -30,11 +29,12 @@ public class ContatoService {
         contatos.remove(contatoASerRemovido);
     }
 
-    public List<Contato> editarContato (Contato contatoEditado){
-        if (contatos.contains(contatoEditado)){
-            removerContato(contatoEditado);
+    public List<Contato> editarContato (Contato contatoEditado, Contato contatoAEditar){
+        if (contatos.contains(contatoAEditar)){
+            removerContato(contatoAEditar);
+            contatos.add(contatoEditado);
         }
-        return adicionarContato(contatoEditado);
+        return contatos;
     }
     public List<Contato> adicionarAosFavoritos(Contato contatoFavoritado){
         favoritos.add(contatoFavoritado);
@@ -55,6 +55,11 @@ public class ContatoService {
         return contatoBuscado.get();
     }
 
+    public List<Contato> retornarContatos() {
+        return contatos;
+    }
 
-
+    public List<Contato> retornarFavoritos() {
+        return favoritos;
+    }
 }
