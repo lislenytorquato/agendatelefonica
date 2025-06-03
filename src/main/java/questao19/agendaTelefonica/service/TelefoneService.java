@@ -26,13 +26,12 @@ public class TelefoneService {
     public void deletarTelefone(Telefone telefone){
         telefones.remove(telefone);
     }
-    public List<Telefone> editarTelefone(Telefone telefoneEditado){
-        telefones.forEach(telefoneNaLista -> {
-            if (telefoneNaLista.getId().equals(telefoneEditado.getId())){
-                telefones.remove(telefoneNaLista);
-            }
-        });
-        return criarTelefone(telefoneEditado);
+    public List<Telefone> editarTelefone(Telefone telefoneEditado,Telefone telefoneAEditar){
+        if (telefones.contains(telefoneAEditar)){
+            telefones.remove(telefoneAEditar);
+             telefones.add(telefoneEditado);
+        }
+        return telefones;
     }
 
     public List<Telefone> retornarListaDeTelefones(){

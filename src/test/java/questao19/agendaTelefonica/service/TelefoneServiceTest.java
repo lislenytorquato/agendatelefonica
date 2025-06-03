@@ -56,26 +56,26 @@ public class TelefoneServiceTest {
     @DisplayName("3- deve editar telefone")
     void deveEditarTelefone(){
         Telefone telefone1 = new Telefone(ID_1,TipoTelefoneEnum.CELULAR,NUMERO_1);
-        Telefone telefone2 = new Telefone(ID_1,TipoTelefoneEnum.CASA,NUMERO_2);
+        Telefone telefone2 = new Telefone(ID_2,TipoTelefoneEnum.CASA,NUMERO_2);
         List<Telefone> telefones = List.of(telefone1);
-        List<Telefone> telefonesEditados = telefoneService.editarTelefone(telefone2);
-        Assertions.assertEquals(telefones.get(0).getId(), telefonesEditados.get(0).getId());
-        Assertions.assertNotEquals(telefones.get(0).getNumero(), telefonesEditados.get(0).getNumero());
-        Assertions.assertNotEquals(telefones.get(0).getTipo(), telefonesEditados.get(0).getTipo());
+        telefoneService.criarTelefone(telefone1);
+        List<Telefone> telefonesEditados = telefoneService.editarTelefone(telefone2,telefone1);
+        Assertions.assertEquals(1,telefonesEditados.size());
+        Assertions.assertEquals(telefone2.getId(),telefonesEditados.get(0).getId());
     }
     @Test
-    @DisplayName("3- deve editar telefone")
+    @DisplayName("4- nao deve editar telefone")
     void deveNaoEditarQuandoTelefoneIdEhDiferente(){
         Telefone telefone1 = new Telefone(ID_1,TipoTelefoneEnum.CELULAR,NUMERO_1);
         Telefone telefone2 = new Telefone(ID_2,TipoTelefoneEnum.CASA,NUMERO_2);
         List<Telefone> telefones = List.of(telefone1);
-        List<Telefone> telefonesEditados = telefoneService.editarTelefone(telefone2);
-        Assertions.assertNotEquals(telefones.get(0).getId(), telefonesEditados.get(0).getId());
-        Assertions.assertNotEquals(telefones.size(), telefonesEditados.size());
+        List<Telefone> telefonesEditados = telefoneService.editarTelefone(telefone2,telefone2);
+        Assertions.assertEquals(0,telefonesEditados.size());
+
     }
 
     @Test
-    @DisplayName("4- deve retornar listas de Telefone")
+    @DisplayName("5- deve retornar listas de Telefone")
     void deveRetornarListaDeTelefone() {
         Telefone telefone1 = new Telefone(ID_1, TipoTelefoneEnum.CELULAR, NUMERO_1);
         Telefone telefone2 = new Telefone(ID_2, TipoTelefoneEnum.CASA, NUMERO_2);
@@ -85,7 +85,7 @@ public class TelefoneServiceTest {
         Assertions.assertEquals(telefones.size(), telefoneService.retornarListaDeTelefones().size());
     }
     @Test
-    @DisplayName("5- deve retornar lista de tipos de telefone")
+    @DisplayName("6- deve retornar lista de tipos de telefone")
     void deveRetornarListaDeTipoDeTelefone(){
         List<TipoTelefoneEnum> tiposTelefone = List.of(TipoTelefoneEnum.CELULAR, TipoTelefoneEnum.CASA, TipoTelefoneEnum.TRABALHO);
         List<TipoTelefoneEnum> tiposTelefonesRetornados = telefoneService.retornarTipoTelefone();

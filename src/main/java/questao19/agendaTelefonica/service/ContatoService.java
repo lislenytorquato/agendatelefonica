@@ -29,6 +29,7 @@ public class ContatoService {
     public void removerContato (Contato contatoASerRemovido){
         contatos.remove(contatoASerRemovido);
     }
+
     public List<Contato> editarContato (Contato contatoEditado){
         if (contatos.contains(contatoEditado)){
             removerContato(contatoEditado);
