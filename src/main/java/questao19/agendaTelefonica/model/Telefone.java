@@ -1,11 +1,17 @@
 package questao19.agendaTelefonica.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import questao19.agendaTelefonica.enums.TipoTelefoneEnum;
 
 import java.util.Objects;
 
+@Entity
 public class Telefone {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private TipoTelefoneEnum tipo;
     private String numero;
@@ -17,14 +23,6 @@ public class Telefone {
     }
 
     public Telefone() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public TipoTelefoneEnum getTipo() {
