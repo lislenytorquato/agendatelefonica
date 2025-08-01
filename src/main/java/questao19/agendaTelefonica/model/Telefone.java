@@ -1,25 +1,22 @@
 package questao19.agendaTelefonica.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import questao19.agendaTelefonica.enums.TipoTelefoneEnum;
 
 import java.util.Objects;
 
-@Entity
+@Embeddable
 public class Telefone {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private TipoTelefoneEnum tipo;
+
+    private String ddd;
     private String numero;
 
-    public Telefone(Long id, TipoTelefoneEnum tipo, String numero) {
-        this.id = id;
+    public Telefone( TipoTelefoneEnum tipo, String numero,String ddd) {
         this.tipo = tipo;
         this.numero = numero;
+        this.ddd = ddd;
     }
 
     public Telefone() {
@@ -41,15 +38,11 @@ public class Telefone {
         this.numero = numero;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Telefone telefone = (Telefone) o;
-        return Objects.equals(id, telefone.id) && tipo == telefone.tipo && Objects.equals(numero, telefone.numero);
+    public String getDdd() {
+        return ddd;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, tipo, numero);
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
     }
 }

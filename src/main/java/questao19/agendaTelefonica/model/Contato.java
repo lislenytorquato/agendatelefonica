@@ -1,12 +1,8 @@
 package questao19.agendaTelefonica.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Contato {
@@ -14,14 +10,20 @@ public class Contato {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private List<Telefone> telefone;
+
+
+    private Telefone telefone;
+
+    private boolean favorito;
 
     public Contato() {
     }
 
-    public Contato(String nome, List<Telefone> telefone) {
+    public Contato(Long id, String nome, Telefone telefone, boolean favorito) {
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
+        this.favorito = favorito;
     }
 
     public String getNome() {
@@ -32,23 +34,19 @@ public class Contato {
         this.nome = nome;
     }
 
-    public List<Telefone> getTelefone() {
+    public Telefone getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(List<Telefone> telefone) {
+    public void setTelefone(Telefone telefone) {
         this.telefone = telefone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Contato contato = (Contato) o;
-        return Objects.equals(nome, contato.nome) && Objects.equals(telefone, contato.telefone);
+    public boolean isFavorito() {
+        return favorito;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, telefone);
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 }
